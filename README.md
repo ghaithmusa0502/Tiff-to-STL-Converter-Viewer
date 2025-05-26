@@ -10,7 +10,9 @@
          * **Pixels per Unit (mm):** Control the real-world scale of the 3D model relative to image pixels.
          * **Invert Height:*** Option to invert the height mapping, making darker pixels taller instead of brighter ones.  
     * **Real-time 3D Visualisation:** Utilizes PyVista for interactive 3D rendering of the converted or loaded STL models.
-    * **Automatic Z-Height Colouring:** Models are automatically coloured in the viewer based on their Z-axis height, using a gradient from black (low) to white (high) with a gold midpoint.
+    * **Automatic Z-Height Colouring:** Models displayed in the viewer are automatically colored based on their Z-axis height. This colouring uses a gradient ranging from black for low heights to red for high heights, with a gold midpoint. Users can also select a solid colour for the model or customise the low, mid, and high gradient colours.
+    * **Screenshot Capability:** The application allows users to save a screenshot of the currently displayed 3D model in PNG format.
+    * **Reset View:** A "Reset View to Initial Position" button is available to return the 3D viewer's camera to its original position when the model was first loaded or converted.
     * **Save Functionality:"" Save the generated or loaded 3D models as new .stl files.
 * **Usage:**
     1.  Ensure all dependencies are installed.
@@ -23,14 +25,16 @@
         * Pixels per Unit (mm): Specify the real-world dimension that each pixel in your image represents (e.g., 0.1 means 10 pixels will equate to 1 millimetre in the 3D model).
         * Invert Height: Check this box if you want darker areas of your image to correspond to taller features in the generated 3D model 
     5.  **Convert Image to STL:** After loading an image and configuring the settings, click "Convert Image to STL". The application will process the image and render the resulting 3D model in the integrated viewer
-    6.  Save STL File: Once a model is displayed in the viewer (either newly converted or loaded), click "Save Current STL File" to save it to your chosen location on your system 
-    7.   Click "Stop Logging" to end the experiment. Data will be exported according to the selected format and setting
-    8.    3D Viewer Interaction: Use your mouse to freely rotate, pan, and zoom the 3D model within the viewer.
+    6.  **Save STL File:** Once a model is displayed in the viewer (either newly converted or loaded), click "Save Current STL File" to save it to your chosen location on your system
+    7.  **3D Viewer Interaction:** Use your mouse to freely rotate, pan, and zoom the 3D model within the viewer.
+    8.  **Save Screenshot:** Click "Save Screenshot (PNG)" to capture the current view of the 3D model.
+    9. **Reset View:** Click "Reset View to Initial Position" to revert the camera to its initial state.
+    10.   **Stop Logging:** to end the experiment. Data will be exported according to the selected format and setting
 
 * **Dependencies:**
     * `PyQt5:` The framework used for building the graphical user interface.
     * `Pillow` (PIL) For opening and processing various image formats
-    * `numpy`  Essential for numerical operations and array manipulations, especially for heightmap and mesh data.
+    * `numpy`  For numerical operations and array manipulations, especially for heightmap and mesh data.
     * `numpy-stl`  For creating and saving STL mesh files.
     * `pyvista` A powerful library for 3D plotting and mesh analysis, used for rendering the STL models.
     * `pyvistaqt` Integrates PyVista's 3D plotting capabilities with PyQt5 applications.
