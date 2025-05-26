@@ -41,3 +41,10 @@
 ```bash
 pip install PyQt5 Pillow numpy numpy-stl pyvista pyvistaqt
 ```
+
+## Images 
+### Image to STL Conversion
+![Screenshot of the Image to STL converter with image loaded](images/stl_converter_main.png)
+
+### 3D Model Viewer
+![Screenshot showing a 3D model in the PyVista viewer](images/stl_viewer_model.png)
