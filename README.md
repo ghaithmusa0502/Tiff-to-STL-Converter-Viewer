@@ -13,7 +13,7 @@
     * **Automatic Z-Height Colouring:** Models displayed in the viewer are automatically colored based on their Z-axis height. This colouring uses a gradient ranging from black for low heights to red for high heights, with a gold midpoint. Users can also select a solid colour for the model or customise the low, mid, and high gradient colours.
     * **Screenshot Capability:** The application allows users to save a screenshot of the currently displayed 3D model in PNG format.
     * **Reset View:** A "Reset View to Initial Position" button is available to return the 3D viewer's camera to its original position when the model was first loaded or converted.
-    * **Save Functionality:"" Save the generated or loaded 3D models as new .stl files.
+    * **Save Functionality:** Save the generated or loaded 3D models as new .stl files.
 * **Usage:**
     1.  Ensure all dependencies are installed.
     2.  Run the script: `Tiff_to_STL_converter & viewer.py"`
@@ -29,7 +29,7 @@
     7.  **3D Viewer Interaction:** Use your mouse to freely rotate, pan, and zoom the 3D model within the viewer.
     8.  **Save Screenshot:** Click "Save Screenshot (PNG)" to capture the current view of the 3D model.
     9. **Reset View:** Click "Reset View to Initial Position" to revert the camera to its initial state.
-    10.   **Stop Logging:** to end the experiment. Data will be exported according to the selected format and setting
+    10.   **Stop Logging:** to end the experiment. Data will be exported according to the selected format and settings
 
 * **Dependencies:**
     * `PyQt5:` The framework used for building the graphical user interface.
