@@ -38,7 +38,7 @@ A powerful PyQt5-based application for converting 2D images into 3D STL models a
 Install all required dependencies:
 
 ```bash
-pip install PyQt5 Pillow numpy numpy-stl pyvista pyvistaqt
+pip install PyQt5 Pillow numpy numpy-stl pyvista pyvistaqt scipy
 ```
 
 #### Individual Package Details:
@@ -48,6 +48,7 @@ pip install PyQt5 Pillow numpy numpy-stl pyvista pyvistaqt
 - **numpy-stl**: STL file handling
 - **pyvista**: 3D visualization and mesh processing
 - **pyvistaqt**: PyVista-Qt integration
+- **scipy**: Signal and image processing
 
 ## Usage
 
