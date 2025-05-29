@@ -1,154 +1,204 @@
-# Rigol Power Supply Automation and Logging Script
+# TIFF to STL Converter & Viewer
 
-This repository contains Python scripts designed for use in manufacturing tip etching, specifically for controlling a Rigol DP811A power supply (though the core logic can be adapted for other VISA-compatible instruments).
+A powerful PyQt5-based application for converting 2D images into 3D STL models and viewing them in an interactive 3D environment. Perfect for creating heightmaps, topographical models, and converting grayscale images into printable 3D objects.
 
-## Scripts
+## Features
 
-### 1. Power_Supply_Stopper.py
+###  Image Processing
+- **Multi-format Support:** Load PNG, JPG, JPEG, BMP, GIF, TIF, and TIFF images
+- **Height Mapping:** Convert grayscale values to 3D height data
+- **Invert Height Option:** Make darker pixels taller or shorter
+- **Configurable Scale:** Set pixels-per-unit for precise dimensional control
+- **Adjustable Max Height:** Control the maximum Z-height of your 3D model
 
-This script provides a comprehensive Tkinter-based graphical user interface (GUI) for controlling a programmable power supply. It includes advanced features such as preset management, configurable export formats, detailed logging, and an interactive user experience for electrochemical etching experiments.
+###  Advanced Visualisation
+- **Interactive 3D Viewer:** Real-time PyVista-powered 3D visualization
+- **Dual Colour Modes:**
+  - **Height-based Gradient:** Customizable 3-colour gradient (low/mid/high)
+  - **Solid Color:** Uniform color with custom selection
+- **Camera Controls:** Pan, zoom, rotate with reset-to-initial functionality
+- **Grid & Axes:** Optional coordinate system display
 
-## Key Features
+###  Export & Save Options
+- **STL Export:** Save as industry-standard STL files for 3D printing
+- **Screenshot Capture:** Export high-quality PNG images of your 3D model
+- **Smart Naming:** Automatic filename suggestions based on source files
 
-- **GUI Interface:** User-friendly interface built with Tkinter and ttkthemes
-- **VISA Resource Scanning:** Automatically scans for and lists available VISA instruments
-- **Configurable Parameters:** Allows setting of voltage, current, and stop threshold; supports above or below stop conditions
-- **Real-time Plotting:** Live plots for Voltage, Current, Power, and Resistance with configurable styles
-- **Data Logging & Export:**
-  - Logs all data points in memory during the session
-  - Exports data to CSV, XLSX (Excel), or JSON formats
-  - Includes configuration settings and user notes in exported files
-- **Preset Management:** Save and load configurations for different experimental setups
-- **Simulation Mode:** Enables running the application without a physical instrument for testing or demonstration
-- **Notes Section:** Add and save experimental notes, which are included in data exports
-- **Electrochemical Cell Information:** Fields for Anode, Cathode, Electrolyte, and Molarity details, saved with the data
-- **Status & Log Tabs:** Provides real-time status updates and a detailed event log
-- **Customizable Appearance:** Selectable GUI themes and plot styles
+###  Dual Workflow Support
+- **Image → STL:** Convert 2D images to 3D models
+- **STL Viewer:** Load and visualise existing STL files with enhanced colouring
 
 ## Installation
 
+### Prerequisites
+- Python 3.7 or higher
+- pip package manager
+
 ### Dependencies
 
-Install all required dependencies using pip:
+Install all required dependencies:
 
 ```bash
-pip install pyvisa pandas openpyxl numpy matplotlib ttkthemes Pillow psutil zeroconf pyvisa-py
+pip install PyQt5 Pillow numpy numpy-stl pyvista pyvistaqt
 ```
 
-**Note:** `tkinter` and `winsound` are usually included with Python installations.
-
-### Required Dependencies:
-- `tkinter` (usually part of Python's standard library)
-- `pyvisa` (for instrument communication)
-- `pandas` (for XLSX and JSON export)
-- `openpyxl` (for XLSX export, used by pandas)
-- `numpy` (for numerical operations, especially in plotting)
-- `matplotlib` (for plotting)
-
-### Optional Dependencies:
-- `ttkthemes` (for enhanced GUI styling; falls back to default Tkinter styles if not found)
-- `Pillow (PIL)` (for using .ico window icons; falls back if not found)
-- `winsound` (for beep sound on Windows when threshold is met; script runs on other OS without it)
-- `psutil` (System monitoring, not directly used in the provided script but listed in original dependencies)
-- `zeroconf` (For auto-discovery of networked instruments, not directly used in the provided script but listed in original dependencies)
-- `pyvisa-py` (Backend for pyvisa, pure Python implementation, no NI-VISA needed)
+### Individual Package Details:
+- **PyQt5**: GUI framework
+- **Pillow (PIL)**: Image processing
+- **numpy**: Numerical computations
+- **numpy-stl**: STL file handling
+- **pyvista**: 3D visualization and mesh processing
+- **pyvistaqt**: PyVista-Qt integration
 
 ## Usage
 
-1. Ensure all dependencies are installed
-2. Run the script: 
+### Getting Started
+
+1. **Launch the Application:**
    ```bash
-   python "Power Supply Stopper.py"
+   python "Tiff_to_STL_converter & viewer.py"
    ```
 
-### Control Tab:
-- Scan for VISA resources
-- Set desired Voltage, Current, and Stop Threshold
-- Choose the save location and export format (CSV, XLSX, JSON, or All)
-- Fill in electrochemical cell information as needed
+2. **Choose Your Workflow:**
+   - **For Image Conversion:** Use "Browse Image for Conversion..."
+   - **For STL Viewing:** Use "Load Existing STL..."
 
-### Settings Tab:
-- Configure plot update interval, max plot points, GUI theme, and plot style
-- Enable/disable simulation mode
-- Set the stop condition (current below or above threshold)
-- Manage presets (save, load, delete)
+### Image to STL Conversion Workflow
 
-### Notes Tab:
-- Add any relevant experimental notes, which will be saved with the configuration and included in data exports
+#### Step 1: Load Image
+- Click **"Browse Image for Conversion..."**
+- Select your image file (PNG, JPG, TIFF, etc.)
+- Preview appears in the left panel
 
-### Operation:
-1. Click "Start Logging" - The application will switch to the "Plots" tab
-2. Click "Stop Logging" to end the experiment. Data will be exported according to the selected format and settings
-3. The "Log" tab shows a history of operations and events
+#### Step 2: Adjust Conversion Settings
+- **Max Height (mm):** Maximum Z-dimension of your 3D model
+- **Pixels per Unit (mm):** Scale factor (e.g., 0.1 = 10 pixels per mm)
+- **Invert Height:** Check to make darker areas taller
 
-## Code Architecture
+#### Step 3: Convert & Customise
+- Click **"Convert Image to STL"**
+- Model appears in 3D viewer
+- Adjust colours using the colour controls
+- Use camera controls to examine your model
 
-### Core Components
+#### Step 4: Export
+- **Save STL:** Export for 3D printing
+- **Save Screenshot:** Capture current view as PNG
+- **Reset View:** Return to initial camera position
 
-#### 1. Imports and Third-Party Libraries
-The script uses try-except blocks to handle optional dependencies gracefully, importing:
-- **Standard Library Modules:** `tkinter`, `messagebox`, `filedialog`, `ttk`, `StringVar`, `BooleanVar`, `os`, `sys`, `json`, `csv`, `queue`, `threading`, `time`, `traceback`, `datetime`, `collections.deque`, `concurrent.futures.ThreadPoolExecutor`, and `typing`
-- **Third-Party Libraries:** `winsound`, `pyvisa`, `pandas`, `openpyxl`, `numpy`, `matplotlib`, `ttkthemes`, `Pillow (PIL)`
+### STL Viewing Workflow
 
-#### 2. Constants
-Comprehensive set of constants defining application parameters, file names, UI settings, and operational modes.
+1. Click **"Load Existing STL..."**
+2. Select your STL file
+3. Model loads with automatic height-based colouring
+4. Use colour controls to customise appearance
+5. Export screenshots or save modified STL
 
-#### 3. Tooltip Class
-Helper class creating transient pop-up windows with descriptive text when hovering over widgets.
+## Interface Overview
 
-#### 4. ConfigManager Class
-Manages persistent storage and retrieval of application settings and user-defined presets:
-- **Initialisation:** Sets up default configuration values and loads existing settings
-- **Configuration Management:** `load_config()` and `save_config()` methods
-- **Preset Management:** Methods for saving, loading, and managing groups of settings
-- **Notes Management:** Handles user notes stored within the main configuration
+### Control Panel (Left Side)
 
-#### 5. DataManager Class
-Efficiently manages collected data points using `collections.deque` for optimised real-time plotting performance.
+#### 1. Load Image or STL
+- File loading buttons
+- Image preview area
 
-#### 6. DataLogger Class
-Critical component for power supply interaction and data acquisition:
-- **Connection Management:** Establishes a VISA connection or simulation mode
-- **Data Acquisition:** Runs in a separate thread for GUI responsiveness
-- **Export Functions:** Static methods for CSV, Excel, and JSON export with embedded metadata
+#### 2. Adjust Conversion Settings
+- Height and scale parameters
+- Invert height checkbox
 
-#### 7. PowerLoggerApp Class
-Main Tkinter application coordinating GUI and all other components:
-- **Multi-tab Interface:** Control, Settings, Plots, Log, Notes, and About tabs
-- **Real-time Plotting:** Integrated matplotlib with animation
-- **Event Handling:** User interactions and application logic
-- **Threading:** Maintains GUI responsiveness during data acquisition
-- **Theme Management:** Dynamic GUI and plot style changes
+#### 3. Convert & Save
+- Conversion trigger
+- Export options (STL, Screenshot)
+- View reset
 
-## Screenshots
+#### 4. Change Model Colour
+- **Colour Mode Selection:**
+  - Original (Height-based gradient)
+  - Solid Colour
+- **Height Gradient Colours:**
+  - Low Height Colour (typically black/dark)
+  - Mid Height Colour (typically gold/yellow)
+  - High Height Colour (typically red/bright)
+- **Custom Solid Color:** Color picker for uniform coloring
 
-*Note: Success is assured only with the RIGOL DP 811A power supply, as it was the only one available for testing.*
+### 3D Viewer (Right Side)
+- Interactive PyVista visualisation
+- Mouse controls: rotate, pan, zoom
+- Grid and axes display
+- Real-time colour updates
 
-- Power Supply Control Tab 1
-- Power Supply Control Tab 2  
-- Power Supply Settings Tab
-- Real-time Plotting
+## Technical Architecture
 
-## Limitations
+### Core Classes
 
-When decreasing the logging time down to 10ms, plotting time increases, but this does not affect the logging or export process for JSON, CSV, or XLSX formats.
+#### `ImageToSTLApp` (Main Application)
+- PyQt5 QMainWindow-based GUI
+- Coordinates all functionality
+- Manages UI state and user interactions
 
-## Experimental Notes
+#### Key Methods:
+- `load_image()`: Image file loading and preview
+- `load_stl()`: STL file loading with format validation
+- `convert_image_to_stl()`: Core conversion algorithm
+- `apply_color_to_mesh()`: Dynamic colour application
+- `save_stl()`: STL export functionality
 
-These programs are beneficial for electrochemical etching projects. Below are some successful parameters found during testing:
+### Conversion Algorithm
 
-### Nickel Etching
-- **Constant Voltage:** 0.5 M HCl, 4V, 0.5 amps, with a threshold of 0.09 amps
-  - *Result:* Sub-100nm radius of curvature achieved
-- **Constant Current:** 0.5 M HCl, 12V, 0.1 amps, with a Voltage limit of 6 Volts
+1. **Image Processing:**
+   - Convert to grayscale using PIL
+   - Normalise pixel values (0-255 → 0-1)
+   - Apply height scaling and inversion
 
-### Tungsten Etching
-- **Constant Voltage:** 2 M NaOH, 9V, 1 amp with a threshold of 0.032 amps
-  - *Result:* Sub-100nm radius of curvature achieved
-- **Constant Current:** 2 M NaOH, 15V, 0.1 amp with a voltage limit of 12.004 Volts
+2. **Mesh Generation:**
+   - Create a vertex grid from pixel positions
+   - Generate triangular faces for the surface
+   - Build PyVista PolyData structure
 
-**Recommendation:** Further experimentation with the Constant Current setting is recommended, as it showed potential for producing smoother tips.
+3. **Dual Format Support:**
+   - PyVista mesh for visualisation
+   - numpy-stl mesh for file export
 
-## Final Note
+### Colour System
 
-Don't get better tips than me!
+#### Height-based Gradient
+- Three-point gradient interpolation
+- Customizable low/mid/high colours
+- Real-time colour computation based on Z-values
+
+#### Solid Colour Mode
+- Uniform colour application
+- Custom colour picker integration
+- Preserved colour preferences
+
+## File Formats
+
+### Supported Input Formats
+- **Images:** PNG, JPG, JPEG, BMP, GIF, TIF, TIFF
+- **3D Models:** STL (binary and ASCII)
+
+### Output Formats
+- **STL:** Industry-standard 3D printing format
+- **PNG:** High-resolution screenshots
+
+## Tips & Best Practices
+
+### For Best Results:
+1. **Use High-Contrast Images:** Better height differentiation
+2. **Consider Scale:** Match pixels-per-unit to your intended print size
+3. **Test Height Settings:** Start with moderate max heights (5-20mm)
+4. **Preview Before Export:** Use 3D viewer to verify model appearance
+
+## System Requirements
+
+- **Operating System:** Windows, macOS, or Linux
+- **Python:** 3.7+
+- **Memory:** 4GB+ RAM recommended for large images
+- **Graphics:** OpenGL-compatible graphics card for 3D visualization
+
+## Acknowledgments
+
+- **PyVista:** Excellent 3D visualization capabilities
+- **numpy-stl:** Robust STL file handling
+- **PyQt5:** Comprehensive GUI framework
+
