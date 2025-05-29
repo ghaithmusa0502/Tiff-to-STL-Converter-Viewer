@@ -195,6 +195,15 @@ pip install PyQt5 Pillow numpy numpy-stl pyvista pyvistaqt scipy
 - **Memory**: 4GB+ RAM recommended for large images
 - **Graphics**: OpenGL-compatible graphics card for 3D visualization
 
+## Screen Shots
+
+### Tiff Converter 
+
+![Screenshot](images/stl_converter_main.png)
+
+### STL Viewer
+![Screenshot](images/stl_viewer_model.png)
+
 ## Acknowledgments
 
 - **PyVista**: Excellent 3D visualization capabilities
